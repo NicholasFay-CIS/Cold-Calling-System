@@ -5,7 +5,7 @@ class Priority_Queue:
     contains tuples of student objects, their priority and their count in the 
     """
     def __init__(self):
-        self.queue = [] #our queue list items
+        self.queue = list() #our queue list items
         self.count = 0 # count of queue contents
 
     def push(self, student, priority):
