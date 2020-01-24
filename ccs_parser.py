@@ -6,7 +6,7 @@ class Student:
     This class is intended to initialize a student object with the attributes
     that have been parsed
     """
-    def do_local(self, first=None, last=None, ID=None, email=None):
+    def __init__(self, first=None, last=None, ID=None, email=None):
         """
         self, first (str), last (str), ID (str), email (str) -> None
         Initialize a student with a first and last name,

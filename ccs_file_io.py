@@ -22,16 +22,16 @@ class File_Input_Output:
         """
         #open the file to get the file obj
         #try to open the file
-        try:
-            #if you can open the file, 
-            #open the filepath and return the file object
-            file = open(filepath, "r")
-            return file
-        except:
-            print("ERROR: File not found. Please provide a correct file path")
-            #exit the program if there is no correct file to open
-            sys.exit()
-        return
+        while(True):
+            try:
+                #if you can open the file, 
+                #open the filepath and return the file object
+                file = open(filepath, "r")
+                break
+            except:
+                print("ERROR: File not found. Please provide a correct file path")
+                #exit the program if there is no correct file to open
+        return file
     
     def write_to_file(self, filepath, database):
         """
