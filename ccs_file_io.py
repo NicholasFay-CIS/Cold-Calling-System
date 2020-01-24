@@ -41,12 +41,12 @@ class File_Input_Output:
         as the next input file.
         ### I am using the database for now till things are more concrete ###
         """
-        file = open(filepath, "w") #open the file
-        file.write(HEADER_STRING) # write the file header
-        #iterate through whatever database or student set and write them to the file 
-        #in the same order of the input file
-        for student in database:
-            file.write("{}\t{}\t{}\t{}\n".format(student.first_name, student.last_name, student.id, student.email))
+        with open(filepath, "w") as file: #open the file
+            file.write(HEADER_STRING) # write the file header
+            #iterate through whatever database or student set and write them to the file 
+            #in the same order of the input file
+            for student in database:
+                file.write("{}\t{}\t{}\t{}\n".format(student.first_name, student.last_name, student.id, student.email))
         return
             
             

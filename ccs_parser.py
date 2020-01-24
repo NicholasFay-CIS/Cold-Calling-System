@@ -56,6 +56,7 @@ class Parser:
             new_student.id = line_list[2]
             new_student.email = line_list[3]
             database.add(new_student)
-        return
+        file.close()
+        return 
     
 
