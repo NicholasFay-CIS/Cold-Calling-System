@@ -14,10 +14,11 @@ class StudentOverlay:
         # tkinter widget root.
         root = Tk()
         root.attributes("-topmost", True)
-        root.focus_set()
+        root.title("Selected students")
+        root.focus_force()
 
         # Create canvas to draw student names to.
-        canvas = Canvas(root, width=0, height=0)
+        canvas = Canvas(root, width=600, height=30)
 
         canvas.pack()
 
@@ -36,33 +37,64 @@ class StudentOverlay:
         self.selected_index = 0
 
     def on_mousemove(self, event):
-        print(event.x, event.y)
+        pass
 
     def on_click(self, event):
-        print(event.x, event.y)
+        pass
 
     def on_press_left(self, event):
-        self.canvas.create_line(0, 0, 100, 100, fill="blue")
-        self.canvas.config(width=100, height=100)
-        self.canvas.pack()
-        print("pressed left!")
+        if(self.selected_index > 0):
+            self.selected_index -= 1
+        self.update()
 
     def on_press_right(self, event):
-        print("pressed right!")
+        if(self.selected_index < 3):
+            self.selected_index += 1
+        self.update()
 
     def on_press_up(self, event):
-        print("pressed up!")
+        name = self.students.pop(self.selected_index)
+        drop_student(name, 1)
 
     def on_press_down(self, event):
-        print("pressed down!")
+        name = self.students.pop(self.selected_index)
+        drop_student(name, 0)
 
-    def update_students(self, students):
-        for student in students:
-            self.students.append(student)
+    def add_student(self, name: str):
+        student = StudentWidget(name)
+        self.students.append(student)
+        self.update()
+        print("Added student:", student)
+
+    def update(self):
+        # Clear the canvas
+        self.canvas.delete("all")
+        # Redraw all the students
+        for index, student in enumerate(self.students):
+            student.draw(self.canvas, index, self.selected_index)
 
     def loop(self):
         self.root.mainloop()
 
+
+class StudentWidget:
+    """
+    Student widget that is displayed in the overlay.
+    """
+    def __init__(self, name: str):
+        self.name = name
+        self.width = 150
+        self.height = 30
+
+    def __str__(self):
+        return self.name
+
+    def draw(self, canvas, index: int, selected_index: int):
+        if(index == selected_index):
+            canvas.create_rectangle(index * self.width, 0, (index + 1) * self.width, self.height, fill="gray")
+        canvas.create_text(20 + index * self.width, 8, text=self.name, anchor=NW, fill="black", font="Impact")
+
+overlay = StudentOverlay()
 
 def main():
     """
@@ -71,7 +103,7 @@ def main():
     """
 
     ### Initialize the overlay gui with other objects:
-    overlay = StudentOverlay()
+    # overlay = StudentOverlay()
 
     ### Pass the students to the overlay with .update_students()
     students = [
@@ -80,11 +112,20 @@ def main():
         "Fish",
         "Worm"
     ]
-    overlay.update_students(students)
+    for name in students:
+        overlay.add_student(name)
 
     ### Call .loop() to start it's draw loop
     overlay.loop()
 
+def drop_student(name: str, flag: bool):
+    if(flag):
+        print("Dropped", name, "with a flag.")
+    else:
+        print("Dropped", name, "without a flag.")
+    overlay.add_student("Bill")
+
 
 if __name__ == "__main__":
     main()
+
