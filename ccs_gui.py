@@ -19,7 +19,6 @@ class StudentOverlay:
 
         # Create canvas to draw student names to.
         canvas = Canvas(root, width=600, height=30)
-
         canvas.pack()
 
         # Bind event handlers.
@@ -60,11 +59,19 @@ class StudentOverlay:
         name = self.students.pop(self.selected_index)
         drop_student(name, 0)
 
-    def add_student(self, name: str):
-        student = StudentWidget(name)
-        self.students.append(student)
+    def add_student(self, names):
+        if(type(names) == str):
+            student = StudentWidget(names)
+            self.students.append(student)
+            print("Added student:", student)
+        elif(type(names) == list):
+            for name in names:
+                student = StudentWidget(name)
+                self.students.append(student)
+                print("Added student:", student)
+        else:
+            print("Input for add_student() not valid")
         self.update()
-        print("Added student:", student)
 
     def update(self):
         # Clear the canvas
@@ -91,8 +98,8 @@ class StudentWidget:
 
     def draw(self, canvas, index: int, selected_index: int):
         if(index == selected_index):
-            canvas.create_rectangle(index * self.width, 0, (index + 1) * self.width, self.height, fill="gray")
-        canvas.create_text(20 + index * self.width, 8, text=self.name, anchor=NW, fill="black", font="Impact")
+            canvas.create_rectangle(index * self.width, 0, (index + 1) * self.width, self.height, fill="gray", outline="gray")
+        canvas.create_text(20 + index * self.width, 8, text=self.name, anchor=NW, fill="black", font="Helvetica")
 
 overlay = StudentOverlay()
 
@@ -105,15 +112,15 @@ def main():
     ### Initialize the overlay gui with other objects:
     # overlay = StudentOverlay()
 
-    ### Pass the students to the overlay with .update_students()
+    ### Pass the students to the overlay with .add_student()
+    ### add_student() can take either a list of names as an argument or a string for one name
     students = [
         "Bird",
         "Frog",
         "Fish",
         "Worm"
     ]
-    for name in students:
-        overlay.add_student(name)
+    overlay.add_student(students)
 
     ### Call .loop() to start it's draw loop
     overlay.loop()
