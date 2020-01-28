@@ -1,3 +1,5 @@
+from ccs_randomization import *
+
 class Priority_Queue:
     """
     This is a python implementation of a priority queue.
@@ -7,6 +9,7 @@ class Priority_Queue:
     def __init__(self):
         self.queue = list() #our queue list items
         self.count = 0 # count of queue contents
+        self.rand = Randomizer(0)
 
     def push(self, student, priority):
         """
@@ -78,4 +81,14 @@ class Priority_Queue:
         """
         print("{} studentsare currently in the queue".format(self.count))
         return
-        
+    
+    def randomize_queue(self):
+        '''
+        This Function randomizes the queue that is currently available
+        '''
+        temp = list() #temporary holder for new random list
+        self.rand.set_size(self.count) #sets size of class for random object
+        self.rand.randomize()
+        for i in self.rand.order:
+            temp.append(self.queue[i])
+        self.queue = temp #set current non-randomized queue to new randomized queue
