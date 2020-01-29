@@ -21,26 +21,51 @@ class Randomizer:
 		return
     
 	def randomize(self):
-		#creates a randomize ordering of students
+		'''
+		None -> None
+		creates a randomize ordering of students
+		'''
 		temp = list()
 
 		self.verify() #verifies the seed is good for randomization and changes if needed
 
-		while i=0 < self.size:
+		i=0
+		while i < self.size:
 			temp.append(i)
 			i += 1
 		self.order = sample(temp, k=self.size)
-		
+
+		return
+
+	def randomize_back(self, index):
+		'''
+		None -> None
+		creates a randomize ordering of students
+		'''
+		temp = list()
+		size = index
+
+		self.verify() #verifies the seed is good for randomization and changes if needed
+
+		while index < self.size:
+			temp.append(index)
+			index += 1
+		self.order = sample(temp, k=self.size - size)
+
 		return
 
 	def verify(self):
-		#Tests randomization to see if the seed is randomized enough
+		'''
+		None -> None
+		Tests randomization to see if the seed is randomized enough
+		'''
 		total = 0 #holds the sum of all random integers
 		totalstd = 0 #holds the sum of all std deviations
 		
 		lst = list() #list of all random integer choices
 
-		while i=0 < 100: #picks 100 random integers
+		i=0
+		while i < 100: #picks 100 random integers
 			curr = randint(1,100)
 			total += curr
 			lst.append(curr)
@@ -55,12 +80,12 @@ class Randomizer:
 		if (avgstd < 10): #if the standard deviation is not varied enough, reset seed and re-verify
 			seed()
 			self.verify()
-
-		return
+		else:
+			return
 
 '''
 def main():
-	#Testing case for module
+	#!!!!!TESTING CODE!!!!!
 	r = Randomizer(15)
 	i = 0
 	for index in r.order:

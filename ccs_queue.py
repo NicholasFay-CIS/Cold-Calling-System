@@ -1,6 +1,6 @@
 from ccs_randomization import *
 #This is the first N% of the queue that cannot be touched
-N = 1
+N = 5
 
 class Queue:
     """
@@ -39,7 +39,7 @@ class Queue:
         student = self.queue[0]
         self.queue.remove(student)
         #deduct from the amount in the queue
-        self.count += 1
+        self.count -= 1
         return student
     
     def calculate_first_n_students(self):
@@ -63,7 +63,7 @@ class Queue:
         This cannot be done in the first n students
         """
         #calculate the number of the first n students 
-        first_n = Queue.calculate_first_n_students(self)
+        first_n = self.calculate_first_n_students()
         #create a list for the first n
         first_n_students = self.queue[:first_n]
         #create a list for the rest of the students in the queue
@@ -86,11 +86,11 @@ class Queue:
         #get 4 students
         for i in range(0, 4):
             #pop the student
-            student = Queue.pop(self)
+            student = self.pop()
             #add them to the on deck list
             on_deck.append(student)
             #randomly reinsert that student somewhere that is not in the first n% of the queue
-            Queue.reinsert_student(self, student)
+            self.reinsert_student(student)
         return on_deck
             
     def printQueue(self):
@@ -108,6 +108,29 @@ class Queue:
         """
         print("{} students are currently in the queue".format(self.count))
         return
+
+    def randomize_nth(self):
+        '''
+        None -> None
+        This function randomizes the first nth positions of the queue that is currently available
+        '''
+        temp = list() #temporary holder for new random list
+
+        self.rand.set_size(self.calculate_first_n_students()) #sets number of first n students for random class
+        self.rand.randomize() #creates a randomized integer list of nth indexes in the queue
+
+        for i in range(0, self.calculate_first_n_students()):
+            temp.append(self.queue[self.rand.order[i]])
+
+        self.rand.set_size(len(self.queue)) #sets number of students left after first n for random class
+        self.rand.randomize_back(self.calculate_first_n_students()) #creates a randomized integer list of length - nth indexes in the queue
+
+        for i in range(0, len(self.queue) - self.calculate_first_n_students()):
+            temp.append(self.queue[self.rand.order[i]])
+
+        self.queue = temp #set current queue to new randomized first nth queue
+        return
+
     
     def randomize_queue(self):
         '''
@@ -115,17 +138,31 @@ class Queue:
         This Function randomizes the queue that is currently available
         '''
         temp = list() #temporary holder for new random list
-        self.rand.set_size(self.count) #sets size of class for random object
-        self.rand.randomize()
+        self.rand.set_size(self.count) #sets number of students for random class
+        self.rand.randomize() #creates a randomized integer list of indexes in the queue
+
         for i in self.rand.order:
             temp.append(self.queue[i])
+
         self.queue = temp #set current non-randomized queue to new randomized queue
         return
 
-queue = Queue()
-i = 1
-while i < 21:
-    queue.push(i)
-    i += 1
-on_deck = queue.get_on_deck()
-print(on_deck)
+
+def main():
+    #!!!!!TESTING CODE!!!!!
+    queue = Queue()
+    i = 1
+    while i < 21:
+        queue.push(i)
+        i += 1
+    queue.randomize_queue()
+    on_deck = queue.get_on_deck()
+    print(queue.queue)
+    print(on_deck)
+    queue.randomize_nth()
+    on_deck = queue.get_on_deck()
+    print(queue.queue)
+    print(on_deck)
+
+if __name__ == "__main__":
+    main()
