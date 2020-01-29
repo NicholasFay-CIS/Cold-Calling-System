@@ -155,14 +155,17 @@ def main():
     while i < 21:
         queue.push(i)
         i += 1
+    print("Starter:       ", queue.queue)
     queue.randomize_queue()
+    print("Randomization: ", queue.queue)
     on_deck = queue.get_on_deck()
-    print(queue.queue)
-    print(on_deck)
+    print("On Deck:       ", on_deck)
+    print("After On Deck: ", queue.queue)
     queue.randomize_nth()
+    print("Random nth:    ", queue.queue)
     on_deck = queue.get_on_deck()
-    print(queue.queue)
-    print(on_deck)
+    print("On Deck:       ", on_deck)
+    print("After On Deck: ", queue.queue)
 
 if __name__ == "__main__":
     main()
