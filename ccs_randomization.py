@@ -31,7 +31,6 @@ class Randomizer:
 
 		i=0
 		while i < self.size:
-
 			temp.append(i)
 			i += 1
 		self.order = sample(temp, k=self.size)

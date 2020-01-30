@@ -1,5 +1,12 @@
 from tkinter import *
 
+from ccs_parser import *
+from ccs_file_io import *
+from ccs_queue import *
+from ccs_main import *
+
+OUTPUT_FILE = "Sampleoutput.txt"
+
 class StudentOverlay:
     """
     The gui module of the system that will display four
@@ -16,6 +23,12 @@ class StudentOverlay:
         root.attributes("-topmost", True)
         root.title("Selected students")
         root.focus_force()
+
+        #File I/O
+        file_io_inst = File_Input_Output()
+        parser_inst = Parser()
+        self.database = Class_Roster()
+        self.queue = Queue()
 
         # Create canvas to draw student names to.
         canvas = Canvas(root, width=600, height=30)
@@ -53,11 +66,12 @@ class StudentOverlay:
 
     def on_press_up(self, event):
         name = self.students.pop(self.selected_index)
-        drop_student(name, 1)
+        self.drop_student(name, 1)
+        return True
 
     def on_press_down(self, event):
         name = self.students.pop(self.selected_index)
-        drop_student(name, 0)
+        self.drop_student(name, 0)
 
     def add_student(self, names):
         if(type(names) == str):
@@ -72,6 +86,36 @@ class StudentOverlay:
         else:
             print("Input for add_student() not valid")
         self.update()
+    
+    def drop_student(self, name: str, flag: bool):
+        if(flag):
+            print("Dropped", name, "with a flag.")
+        else:
+            print("Dropped", name, "without a flag.")
+        self.queue.randomize_queue()
+        self.add_student(self.queue.queue[0])
+
+    #def class_database(self, roster):
+    #    class_roster = roster
+        
+        
+    def add_deck(self, database):
+        """
+        This is a simple example of how the gui
+        would be used with the rest of the program.
+        """
+    ### Initialize the overlay gui with other objects:
+    # overlay = StudentOverlay()                   
+    ### Pass the students to the overlay with .add_student()                                 
+    ### add_student() can take either a list of names as an argument or a string for one name
+        self.database = database
+        for student in self.database.class_roster:
+            self.queue.push(student.first_name)
+        print("after", self.queue.queue)
+        on_deck = self.queue.get_on_deck()
+        on_deck = list(map(str, on_deck))
+        self.add_student(on_deck)
+        self.loop()
 
     def update(self):
         # Clear the canvas
@@ -100,10 +144,12 @@ class StudentWidget:
         if(index == selected_index):
             canvas.create_rectangle(index * self.width, 0, (index + 1) * self.width, self.height, fill="gray", outline="gray")
         canvas.create_text(20 + index * self.width, 8, text=self.name, anchor=NW, fill="black", font="Helvetica")
+#print("here is bug")
+#overlay = StudentOverlay()
 
-overlay = StudentOverlay()
 
-def main():
+#def main():
+
     """
     This is a simple example of how the gui
     would be used with the rest of the program.
@@ -114,25 +160,26 @@ def main():
 
     ### Pass the students to the overlay with .add_student()
     ### add_student() can take either a list of names as an argument or a string for one name
-    students = [
-        "Bird",
-        "Frog",
-        "Fish",
-        "Worm"
-    ]
-    overlay.add_student(students)
+#    students = [
+#        "Bird",
+#        "Frog",
+#        "Fish",
+#        "Worm"
+#    ]
+#    overlay.add_student(students)
 
     ### Call .loop() to start it's draw loop
-    overlay.loop()
+#    overlay.loop()
 
+"""
 def drop_student(name: str, flag: bool):
     if(flag):
         print("Dropped", name, "with a flag.")
     else:
         print("Dropped", name, "without a flag.")
     overlay.add_student("Bill")
+"""
 
-
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
 

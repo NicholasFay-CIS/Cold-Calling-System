@@ -1,10 +1,10 @@
 #imported modules
-from ccs_priority_queue import *
+from ccs_queue import *
 from ccs_parser import *
 from ccs_file_io import *
-
+from ccs_gui import *
 #global variables for file io
-INPUT_FILE = "Sampleimput.txt"
+INPUT_FILE = "Sampleinput.txt"
 OUTPUT_FILE = "Sampleoutput.txt"
 
 def main():
@@ -32,6 +32,16 @@ def main():
     file_io_inst.write_to_file(OUTPUT_FILE, database.class_roster)
     print("File {} has been updated.".format(OUTPUT_FILE))
     print("End.")
+    
+    gui = StudentOverlay()
+    queue = Queue()
+    
+    #for student in database.class_roster:
+    #    queue.push(student.first_name)
+    #print(queue.queue)
+    #on_deck = queue.get_on_deck()
+    #print(on_deck)
+    gui.add_deck(database)
     return
 
 #call to main upon execution of this module
