@@ -41,15 +41,15 @@ class Parser:
     def __init__(self):
         pass
     
-    def parse_and_store_input(self, file, database):
+    def parse_and_store_input(self, file, database, char_split):
         """
         file obj, class.attribute -> None
         This function iterates through an input file
         """
-        file.readline()
         lines = file.readlines()
         for line in lines:
-            line_list = line.strip("\n").split("\t")
+            #split by comma or by tab
+            line_list = line.strip("\n").split(char_split)
             new_student = Student()
             new_student.first_name = line_list[0]
             new_student.last_name = line_list[1]

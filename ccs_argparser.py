@@ -1,6 +1,9 @@
 import argparse
+
+#FIX ME:
+#PUT REAL DEFAULT FILE PATHS!!!!!!
 INPUTFILE = "Test1"
-SAVEDSTATE = "Test2"
+LOGFILE = "Test2"
 
 def obtain_command_line_args():
     """
@@ -11,7 +14,7 @@ def obtain_command_line_args():
     argparser = argparse.ArgumentParser()
     #add the two arguments we want
     argparser.add_argument('--inputfile', nargs=1, required=False, help="This is the input file with all students information to populate the queue.")
-    argparser.add_argument('--savedstate', nargs=1, required=False, help="This is the file the queue state will save to each time it is used/updated.")
+    argparser.add_argument('--logfile', nargs=1, required=False, help="This is the file that shows which students have or have not participated.")
     #create the namespace
     program_options = argparser.parse_args()
     return program_options
@@ -32,10 +35,10 @@ def argparse_helper(options):
         options.inputfile = INPUTFILE
     #check if savedstate file was given
     if(options.savedstate != None):
-        options.savedstate = options.savedstate[0]
+        options.logfile = options.logfile[0]
     else:
         #if not result to default 
-        options.savedstate = SAVEDSTATE
+        options.logfile = LOGFILE
     return options
 
 def collect_and_return_args():
