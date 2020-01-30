@@ -31,6 +31,7 @@ class Randomizer:
 
 		i=0
 		while i < self.size:
+
 			temp.append(i)
 			i += 1
 		self.order = sample(temp, k=self.size)
@@ -65,6 +66,7 @@ class Randomizer:
 		lst = list() #list of all random integer choices
 
 		i=0
+
 		while i < 100: #picks 100 random integers
 			curr = randint(1,100)
 			total += curr
