@@ -28,15 +28,10 @@ class Randomizer:
 		temp = list()
 
 		self.verify() #verifies the seed is good for randomization and changes if needed
-<<<<<<< Updated upstream
 
 		i=0
 		while i < self.size:
 
-=======
-		i = 0
-		while i< self.size:
->>>>>>> Stashed changes
 			temp.append(i)
 			i += 1
 		self.order = sample(temp, k=self.size)
@@ -69,13 +64,8 @@ class Randomizer:
 		totalstd = 0 #holds the sum of all std deviations
 		
 		lst = list() #list of all random integer choices
-<<<<<<< Updated upstream
 
 		i=0
-
-=======
-		i = 0
->>>>>>> Stashed changes
 		while i < 100: #picks 100 random integers
 			curr = randint(1,100)
 			total += curr

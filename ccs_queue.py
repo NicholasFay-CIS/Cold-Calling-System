@@ -1,6 +1,7 @@
 from ccs_file_io import File_Input_Output
 from ccs_randomization import *
 from ccs_argparser import INPUTFILE
+from random import randrange
 #This is the first N% of the queue that cannot be touched
 N = 5
 
@@ -74,8 +75,6 @@ class Queue:
         rest_of_queue.insert(randrange(len(rest_of_queue)+1), student)
         #the queue is now the concatenated version of the two lists
         self.queue = first_n_students + rest_of_queue
-        #save the queue state in the file
-        File_Input_Output.write_to_file(self, INPUTFILE, self.queue)
         self.count += 1
         return
     
@@ -95,6 +94,8 @@ class Queue:
             on_deck.append(student)
             #randomly reinsert that student somewhere that is not in the first n% of the queue
             self.reinsert_student(student)
+            #save the queue state in the file
+            File_Input_Output.write_to_file(self, INPUTFILE, self.queue)
         return on_deck
             
     def printQueue(self):
