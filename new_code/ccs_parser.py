@@ -95,17 +95,18 @@ class Parser:
         file obj, class.attribute -> None
         This function iterates through an input file
         """
+        nine_five_number = "95"
         lines = file.readlines()
         for line in lines:
             #split by comma or by tab
             line_list = line.strip("\n").split(char_split)
             new_student = Student()
             #check for edge cases in file input
-            if(len(line_list) < 4 or len(line_list) > 4):
+            if(len(line_list) < 4 or len(line_list) > 4 or nine_five_number not in line_list[2]):
                 new_student = self.handle_poor_input_file(new_student, line_list)
                 database.add(new_student)
                 continue
-            #set all student attributes if there is no wrong order 
+            #if everything in the input line is valid 
             new_student.first_name = line_list[0]
             new_student.last_name = line_list[1]
             new_student.id = line_list[2]
