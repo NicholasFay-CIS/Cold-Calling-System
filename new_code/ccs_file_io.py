@@ -39,6 +39,9 @@ class File_Input_Output:
                 break
             except:
                 print("ERROR: File not found. Please provide a correct file path.\n")
+                #FIX ME:
+                ######################################################################
+                #add input from gui
                 #exit the program if there is no correct file to open
         return file
     

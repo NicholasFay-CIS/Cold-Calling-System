@@ -5,7 +5,7 @@ from ccs_file_io import *
 from ccs_gui import *
 from ccs_argparser import *
 #global variables for file io
-INPUT_FILE = "Sampleinput.txt"
+INPUT_FILE = "Sampleimput.txt"
 OUTPUT_FILE = "Sampleoutput.txt"
 
 def main():
@@ -29,6 +29,8 @@ def main():
         print("Student {}: First Name: {} Last Name: {} 95 Number: {} Email: {}".format(student_count, student.first_name, 
         student.last_name, student.id, student.email))
         student_count += 1
+    import sys
+    sys.exit()
     print("Writing remaining students to new file")
     file_io_inst.write_to_file(OUTPUT_FILE, database.class_roster)
     print("File {} has been updated.".format(OUTPUT_FILE))

@@ -42,7 +42,7 @@ class Queue:
         #remove student from the queue
         student = self.queue[0]
         self.queue.remove(student)
-        sel.f.reinsert_student(student)
+        self.reinsert_student(student)
         File_Input_Output.write_to_file(self.io, INPUTFILE, self.queue)
         return student
     
@@ -132,7 +132,7 @@ class Queue:
         self.queue = temp #set current non-randomized queue to new randomized queue
         return
 
-
+"""
 def main():
     #!!!!!TESTING CODE!!!!!
     queue = Queue()
@@ -154,3 +154,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
