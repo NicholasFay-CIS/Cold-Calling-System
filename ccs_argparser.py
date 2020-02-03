@@ -1,9 +1,9 @@
 import argparse
-
+import os
 #FIX ME:
 #PUT REAL DEFAULT FILE PATHS!!!!!!
-INPUTFILE = "Test1"
-LOGFILE = "Test2"
+QUEUEFILE = os.path.expanduser("~/Library/Application Support/CCS/Sampleinput.txt")
+LOGFOLDER = os.path.expanduser("~/Library/Application Support/CCS/logging/")
 
 def obtain_command_line_args():
     """
@@ -13,8 +13,8 @@ def obtain_command_line_args():
     #create argparser
     argparser = argparse.ArgumentParser()
     #add the two arguments we want
-    argparser.add_argument('--inputfile', nargs=1, required=False, help="This is the input file with all students information to populate the queue.")
-    argparser.add_argument('--logfile', nargs=1, required=False, help="This is the file that shows which students have or have not participated.")
+    argparser.add_argument('--queuefile', nargs=1, required=False, help="This is the input file with all students information to populate the queue. MUST BE IN ROOT DIRECTORY.")
+    argparser.add_argument('--logfolder', nargs=1, required=False, help="This is the folder that shows which students have or have not participated.")
     #create the namespace
     program_options = argparser.parse_args()
     return program_options
@@ -28,17 +28,17 @@ def argparse_helper(options):
     If the options were not specified default to hard set input file and saved state file
     """
     #check if input file was given
-    if(options.inputfile != None):
-        options.inputfile = options.inputfile[0]
+    if(options.queuefile != None):
+        options.queuefile = options.queuefile[0]
     else:
         #if not result to default
-        options.inputfile = INPUTFILE
+        options.queuefile = QUEUEFILE
     #check if savedstate file was given
-    if(options.savedstate != None):
-        options.logfile = options.logfile[0]
+    if(options.logfolder != None):
+        options.logfolder = options.logfolder[0]
     else:
         #if not result to default 
-        options.logfile = LOGFILE
+        options.logfolder = LOGFOLDER
     return options
 
 def collect_and_return_args():

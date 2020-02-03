@@ -40,7 +40,7 @@ class File_Input_Output:
             except:
                 print("ERROR: File not found. Please provide a correct file path.\n")
                 #exit the program if there is no correct file to open
-        return file, self.split_char
+        return file
     
     def write_to_file(self, filepath, queue):
         """
@@ -50,6 +50,7 @@ class File_Input_Output:
         as the next input file.
         ### I am using the database for now till things are more concrete ###
         """
+        print(queue)
         with open(filepath, "w") as file: #open the file
             #check if the file was tab deliminated
             if(self.split_char == TAB):
@@ -63,7 +64,6 @@ class File_Input_Output:
             #split up attributes of a student
             file.write(HEADER_STRING_COMMA)
             for student in queue:
-                file.write()("{},{},{},{}\n".format(student.first_name, student.last_name, student.id, student.email))
+                file.write("{},{},{},{}\n".format(student.first_name, student.last_name, student.id, student.email))
         return
-            
         

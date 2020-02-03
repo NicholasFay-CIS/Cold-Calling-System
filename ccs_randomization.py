@@ -40,7 +40,7 @@ class Randomizer:
 	def randomize_back(self, index):
 		'''
 		None -> None
-		creates a randomize ordering of students
+		creates a randomize ordering of back of students
 		'''
 		temp = list()
 		size = index

@@ -31,7 +31,7 @@ class Class_Roster:
         """
         #initialize the class "roster" to a set
         #created the set is much quicker in compile/run time.
-        self.class_roster = set()
+        self.class_roster = list()
 
 class Parser:
     """
@@ -55,8 +55,7 @@ class Parser:
             new_student.last_name = line_list[1]
             new_student.id = line_list[2]
             new_student.email = line_list[3]
-            database.add(new_student)
+            database.append(new_student)
         file.close()
         return 
-    
 
