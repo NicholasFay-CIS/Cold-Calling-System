@@ -28,7 +28,7 @@ class StudentOverlay:
         root.attributes("-topmost", True)
         root.title("Selected students")
         root.focus_force()
-        root.geometry("+{xPos}+{yPos}".format(xPos = -7, yPos=0)) #
+        root.geometry("+{xPos}+{yPos}".format(xPos = -7, yPos=0))
 
         #File I/O
         self.options = options
@@ -58,9 +58,6 @@ class StudentOverlay:
         self.selected_index = 0
 
         # self.errors("Something is wrong with the program, plz uninstall.")
-
-    def error_popup(self, error_string):
-        messagebox.showerror("Error", error_string)
 
     def on_mousemove(self, event):
         pass
@@ -164,46 +161,4 @@ class StudentWidget:
             canvas.create_rectangle(index * self.width, 0, (index + 1) * self.width, self.height, fill="gray", outline="gray")
         canvas.create_text(20 + index * self.width, self.height / 2 - 12, text=self.student.first_name + " " + self.student.last_name, anchor=NW, fill="black", font=("Helvetica", 20))
 
-# class FileNotFoundWidget:
-#     def __init__(self):
-#         self.text = "Input file not found"
-#         self.window = 
-#print("here is bug")
-#overlay = StudentOverlay()
-
-
-#def main():
-
-    """
-    This is a simple example of how the gui
-    would be used with the rest of the program.
-    """
-
-    ### Initialize the overlay gui with other objects:
-    # overlay = StudentOverlay()
-
-    ### Pass the students to the overlay with .add_student()
-    ### add_student() can take either a list of names as an argument or a string for one name
-#    students = [
-#        "Bird",
-#        "Frog",
-#        "Fish",
-#        "Worm"
-#    ]
-#    overlay.add_student(students)
-
-    ### Call .loop() to start it's draw loop
-#    overlay.loop()
-
-"""
-def drop_student_from_list(name: str, flag: bool):
-    if(flag):
-        print("Dropped", name, "with a flag.")
-    else:
-        print("Dropped", name, "without a flag.")
-    overlay.add_student("Bill")
-"""
-
-#if __name__ == "__main__":
-#    main()
 

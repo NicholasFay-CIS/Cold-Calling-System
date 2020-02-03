@@ -1,6 +1,6 @@
 #imported lib
 import sys
-
+from tkinter import messagebox
 #create the header string
 #This is global as this code will only need to compile one time 
 #rather than everytime the file i/o to output function is run
@@ -38,7 +38,9 @@ class File_Input_Output:
                     self.split_char = TAB
                 break
             except:
-                print("ERROR: File not found. Please provide a correct file path.\n")
+                messagebox.showerror("ERROR", "Please provide a correct file path.\nCurrent path:\n" + filepath)
+                file = None
+                break
                 #exit the program if there is no correct file to open
         return file
     
