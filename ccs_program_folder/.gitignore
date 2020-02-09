@@ -1,0 +1,8 @@
+.DS_Store
+.vscode/settings.json
+.vscode/.ropeproject/config.py
+*.pyc
+dist/
+build/
+__pycache__/
+ccs_main.spec
