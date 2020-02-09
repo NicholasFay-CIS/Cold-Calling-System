@@ -1,2 +1,0 @@
-FirstName	LastName	UOID	Email		
-950417486	Lklbutn@uoregon.edu
